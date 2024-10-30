@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: posts-route
+          uri: ${POSTS_ROUTE_URI:http://localhost:8090}
+          predicates:
+            - Path=/create/**
+          filters:
+            - PrefixPath=/user
+            - AddResponseHeader=X-Powered-By, DanSON Gateway Service
+       
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
