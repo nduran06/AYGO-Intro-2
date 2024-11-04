@@ -13,10 +13,37 @@ In this lab a cloud application is built using AWS, and where: A basic Java user
 Java version: 17
 ```
 
-#### Docker Image
+### Structure
+
+#### Web Application folder: [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro)
+
+#### API Gateway folder: [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway)
+
+For the future configuration for Docker, the folder with the dependencies must be generated in each app, that is why this plugin is added to the POM:
+
+![](imgs/plugin.png)
+
 ```
+    <build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 ```
-### Database Config
+
+### Docker-Database Config (AWS)
 
 #### MongoDB container
 
@@ -62,6 +89,17 @@ services:
 docker-compose up --build -d mongodb
 ```
 
+You can try to access the corresponding EC2 IP/DNS with the configured port from your browser. You should be able to see this message:
+
+**From the IP:**
+![](imgs/db_access1.png)
+
+**From the DNS:**
+![](imgs/db_access1.png)
+
+
+#### *IMPORTANT!!!:* Don't forget to open the ports you configured in the inbound rules of your EC2 instance's security group.
+
 #### Code
 
 1. Change the value of the URI attribute for the database connection to the corresponding data for the EC2 machine, in the application.properties file
@@ -73,4 +111,137 @@ mongodb://nduran06:aygopass123@ec2-54-205-104-132.compute-1.amazonaws.com:27017/
 
 This configuration follows these parameters:
 [<img src="imgs/uri_config.png">](https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/connection/connect/)
+
+
+### Apps-Docker Config (Locally)
+
+#### Create the containers with *docker run*
+
+1. Create the *Dockerfile* at the root of each project:
+
+**Web Application:** [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro)
+
+```
+FROM openjdk:17
+WORKDIR /usrapp/bin
+ENV PORT=8090
+COPY /target/classes /usrapp/bin/classes
+COPY /target/dependency /usrapp/bin/dependency
+CMD ["java","-cp","./classes:./dependency/*","com.docker.intro.IntroApplication"]
+
+```
+
+**API Gateway:** [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway) 
+
+```
+FROM openjdk:17
+WORKDIR /usrapp/bin
+ENV PORT=8080
+COPY /target/classes /usrapp/bin/classes
+COPY /target/dependency /usrapp/bin/dependency
+CMD ["java","-cp","./classes:./dependency/*","com.docker.intro.api.gateway.ApiGatewayApplication"]
+
+```
+2. Build the Docker images based on the instructions specified in the Dockerfiles:
+
+**Web Application**
+
+```
+docker build --tag dockerjavaapp .
+```
+![](imgs/app_build.png)
+
+**API Gateway**
+
+```
+docker build --tag dockerapigateway .
+```
+![](imgs/apig_build.png)
+
+3. With docker run create and start a new container, running the previous images:
+
+**Web Application**
+
+```
+docker run -d -p 8090:8090 --name containerdockerjavaapp dockerjavaapp
+```
+![](imgs/app_cont.png)
+
+**API Gateway**
+
+```
+docker run -d -p 8080:8080 --name containerdockerapigateway dockerapigateway
+```
+![](imgs/apig_cont.png)
+
+
+#### Create the containers with *docker compose*
+
+1. Create the *docker-compose.yml* file at the root of each project:
+
+**Web Application:** [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro)
+
+```
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: javaapp
+        ports:
+            - "8087:8090"
+
+```
+
+**API Gateway:** [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway) 
+
+```
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: apigateway
+        ports:
+            - "8088:8080"
+
+```
+
+2. Build, create, start, and attach the containers for each project:
+
+```
+docker-compose up -d
+
+```
+
+**Web Application** 
+
+![](imgs/app_compose.png)
+
+**API Gateway** 
+![](imgs/apig_compose.png)
+
+
+Using Docker Desktop, you can verify your configuration:
+
+
+**Web Application** 
+
+![](imgs/app_dash.png)
+
+**API Gateway** 
+![](imgs/apig_dash.png)
+
+
+#### Docker Image
+```
+```
+
+
+
+
+
+
+
+
 

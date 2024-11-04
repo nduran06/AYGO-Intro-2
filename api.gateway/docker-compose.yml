@@ -3,6 +3,6 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: javaapp
+        container_name: apigateway
         ports:
-            - "8087:8090"
+            - "8088:8080"
