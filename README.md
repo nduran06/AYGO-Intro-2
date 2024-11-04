@@ -74,5 +74,5 @@ mongodb://nduran06:aygopass123@ec2-54-205-104-132.compute-1.amazonaws.com:27017/
 
 This configuration follows these parameters:
 
-![Connection URI](https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/connection/connect/)(https://www.mongodb.com/docs/drivers/java/sync/v4.3/static/f9d22b2e27dea47ffbd6436551c25ec4/f3c7c/connection_uri_parts.webp)
+![Connection URI](https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/connection/connect/)(imgs/uri_config.png.png)
 
