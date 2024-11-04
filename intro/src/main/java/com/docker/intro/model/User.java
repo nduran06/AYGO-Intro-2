@@ -2,7 +2,6 @@ package com.docker.intro.model;
 
 import java.util.Date;
 
-import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

@@ -10,7 +10,7 @@ In this lab a cloud application is built using AWS, and where: A basic Java user
 
 #### Java
 ```
-Versión de JAVA: 17
+Java version: 17
 ```
 
 #### Docker Image
@@ -60,7 +60,6 @@ services:
 
 ```
 docker-compose up --build -d mongodb
-
 ```
 
 #### Code
@@ -73,6 +72,5 @@ mongodb://nduran06:aygopass123@ec2-54-205-104-132.compute-1.amazonaws.com:27017/
 ![](imgs/config_uri.png)
 
 This configuration follows these parameters:
-
-![Connection URI](imgs/uri_config.png)
+[<img src="imgs/uri_config.png">](https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/connection/connect/)
 
