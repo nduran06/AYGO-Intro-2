@@ -92,10 +92,12 @@ docker-compose up --build -d mongodb
 You can try to access the corresponding EC2 IP/DNS with the configured port from your browser. You should be able to see this message:
 
 **From the IP:**
+
 ![](imgs/db_access1.png)
 
 **From the DNS:**
-![](imgs/db_access1.png)
+
+![](imgs/db_access2.png)
 
 
 #### *IMPORTANT!!!:* Don't forget to open the ports you configured in the inbound rules of your EC2 instance's security group.
