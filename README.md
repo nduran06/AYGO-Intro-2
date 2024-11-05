@@ -28,7 +28,6 @@ docker-compose --version
 
 ***Recommendation:*** Assign an storage greater than 8GB to the EC2 machine where the web application will be deployed.
 
-* Have MO installed
 
 ## Features
 
@@ -66,6 +65,7 @@ For the future configuration for Docker, the folder with the dependencies must b
 		</plugins>
 	</build>
 ```
+
 
 ### Docker-Database Config (AWS)
 
