@@ -7,17 +7,17 @@ In this lab a cloud application is built using AWS, and where: A basic Java user
 ## Prerequisites
 
 * Have an AWS account
-* Have Docker installed locally and on 2 EC2 machines
+* Have Docker installed locally and on the two EC2 machines
 
 ```
 sudo yum update -y
 sudo yum install docker
 sudo service docker start
 sudo usermod -a -G docker ec2-user 
-
-* Have Docker Compose installed locally and on 2 EC2 machines
-
 ```
+
+* Have Docker Compose installed locally and on the two EC2 machines
+
 ```
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
