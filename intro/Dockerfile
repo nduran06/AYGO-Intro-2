@@ -4,3 +4,4 @@ ENV PORT=8090
 COPY /target/classes /usrapp/bin/classes
 COPY /target/dependency /usrapp/bin/dependency
 CMD ["java","-cp","./classes:./dependency/*","com.docker.intro.IntroApplication"]
+EXPOSE 8090

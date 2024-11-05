@@ -1,8 +1,8 @@
 services:
-    web:
+    apigateway_app:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: apigateway
+        container_name: container_apigateway
         ports:
-            - "8088:8080"
+            - "8080:8080"

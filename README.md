@@ -100,7 +100,7 @@ You can try to access the corresponding EC2 IP/DNS with the configured port from
 ![](imgs/db_access2.png)
 
 
-#### *IMPORTANT!!!:* Don't forget to open the ports you configured in the inbound rules of your EC2 instance's security group.
+#### *IMPORTANT!!!:* Don't forget to open the ports you configured, in the inbound rules of your EC2 instance's security group.
 
 #### Code
 
@@ -185,13 +185,13 @@ docker run -d -p 8080:8080 --name containerdockerapigateway dockerapigateway
 
 ```
 services:
-    web:
+    user_web_app:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: javaapp
+        container_name: container_user_web_app
         ports:
-            - "8087:8090"
+            - "8090:8090"
 
 ```
 
@@ -199,13 +199,13 @@ services:
 
 ```
 services:
-    web:
+    apigateway_app:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: apigateway
+        container_name: container_apigateway
         ports:
-            - "8088:8080"
+            - "8080:8080"
 
 ```
 
@@ -234,6 +234,10 @@ Using Docker Desktop, you can verify your configuration:
 **API Gateway** 
 ![](imgs/apig_dash.png)
 
+It should now be possible to make a post request via the API gateway:
+
+![](imgs/post1.png)
+![](imgs/db_record.png)
 
 #### Docker Image
 ```

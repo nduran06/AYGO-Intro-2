@@ -1,8 +1,8 @@
 services:
-    web:
+    user_web_app:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: javaapp
+        container_name: container_user_web_app
         ports:
-            - "8087:8090"
+            - "8090:8090"

@@ -11,7 +11,7 @@ public class SpringCloudConfig {
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
        return builder.routes()
-        		        	.route("intro", r -> r.path("/user/**").uri("http://localhost:8090/"))
+        		        	.route("intro", r -> r.path("/user/**").uri("http://172.16.0.110:8090/"))
         		         	.build();
     }
 
