@@ -6,6 +6,30 @@ In this lab a cloud application is built using AWS, and where: A basic Java user
 
 ## Prerequisites
 
+* Have an AWS account
+* Have Docker installed locally and on 2 EC2 machines
+
+```
+sudo yum update -y
+sudo yum install docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user 
+
+* Have Docker Compose installed locally and on 2 EC2 machines
+
+```
+```
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+```
+docker-compose --version
+```
+
+***Recommendation:*** Assign an storage greater than 8GB to the EC2 machine where the web application will be deployed.
+
+* Have MO installed
+
 ## Features
 
 #### Java
@@ -117,7 +141,7 @@ This configuration follows these parameters:
 
 ### Apps-Docker Config (Locally)
 
-#### Create the containers with *docker run*
+### Create the containers with *docker run*
 
 1. Create the *Dockerfile* at the root of each project:
 
@@ -177,7 +201,7 @@ docker run -d -p 8080:8080 --name containerdockerapigateway dockerapigateway
 ![](imgs/apig_cont.png)
 
 
-#### Create the containers with *docker compose*
+### Create the containers with *docker compose*
 
 1. Create the *docker-compose.yml* file at the root of each project:
 
@@ -239,10 +263,24 @@ It should now be possible to make a post request via the API gateway:
 ![](imgs/post1.png)
 ![](imgs/db_record.png)
 
-#### Docker Image
+## Docker Hub
+
+**Web Application** 
+
+1. Repository created:
+
+[nduran06/aygo-intro2-webapp](https://hub.docker.com/repository/docker/nduran06/aygo-intro2-webapp/general)
+
+2. Upload the web application docker image to the repository:
+
 ```
+docker tag intro_user_web_app nduran06/aygo-intro2-webapp:v1
+```
+```
+docker push nduran06/aygo-intro2-webapp:v1
 ```
 
+![](imgs/app_dockhub.png)
 
 
 
