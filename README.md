@@ -4,6 +4,8 @@
 
 In this lab a cloud application is built using AWS, and where: A basic Java user registration application runs in a Docker microcontainer on an EC2 machine; within this machine, there is another microcontainer containing the Mongo database, with which the application interacts; In order to access this EC2 machine, an API Gateway was created with Springboot and is deployed on another EC2 machine.
 
+![](imgs/arqui-intro-2.png)
+
 ## Prerequisites
 
 * Have an AWS account
@@ -28,8 +30,9 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ```
 
-***Recommendation:*** Assign an storage greater than 8GB to the EC2 machine where the web application will be deployed; in this case the assigned storage was 16GB.
-
+***Recommendations:*** 
+* Assign an storage greater than 8GB to the EC2 machine where the web application will be deployed; in this case the assigned storage was 16GB.
+* Create and assign Elastic IP addresses to your EC2 machines.
 
 ## Features
 
@@ -40,12 +43,18 @@ Java version: 17
 
 ### Structure
 
-#### Web Application folder: [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro)
+#### Web Application folder: [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro) 
 
-#### API Gateway folder: [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway)
+* **Port:** 8090
+* **User access:** http://localhost:8090/signup.html
 
-For the future configuration for Docker, the folder with the dependencies must be generated in each app, that is why this plugin is added to the POM:
+![](imgs/local_signup.png)
 
+#### API Gateway folder: [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway) 
+
+* **Port:** 8080
+
+For future Docker configuration, the folder with the dependencies must be generated in each app, that is why this plugin is added to the POM:
 ![](imgs/plugin.png)
 
 ```
