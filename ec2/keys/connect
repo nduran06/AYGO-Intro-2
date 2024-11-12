@@ -1,2 +1,3 @@
 ssh ec2-user@<ec2 machine IP> -i introEC2DockerKeys.pem
-
+ssh ec2-user@54.205.104.132 -i introEC2DockerKeys.pem
+ssh ec2-user@35.153.222.156 -i introEC2DockerKeys.pem

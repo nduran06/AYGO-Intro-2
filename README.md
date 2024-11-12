@@ -121,7 +121,7 @@ services:
 3. Create your container with Docker Compose:
 
 ```
-+docker-compose up --build -d mongodb
+docker-compose up --build -d mongodb
 ```
 
 You can try to access the corresponding EC2 IP/DNS with the configured port from your browser. You should be able to see this message:
@@ -150,13 +150,13 @@ This configuration follows these parameters:
 [<img src="imgs/uri_config.png">](https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/connection/connect/)
 
 
-### Apps-Docker Config (Locally)
+## Apps-Docker Config (Locally)
 
 ### Create the containers with *docker run*
 
 1. Create the *Dockerfile* at the root of each project:
 
-**Web Application:** [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro)
+**1. Web Application:** [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro)
 
 ```
 FROM openjdk:17
@@ -168,7 +168,7 @@ CMD ["java","-cp","./classes:./dependency/*","com.docker.intro.IntroApplication"
 
 ```
 
-**API Gateway:** [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway) 
+**2. API Gateway:** [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway) 
 
 ```
 FROM openjdk:17
@@ -179,32 +179,35 @@ COPY /target/dependency /usrapp/bin/dependency
 CMD ["java","-cp","./classes:./dependency/*","com.docker.intro.api.gateway.ApiGatewayApplication"]
 
 ```
+
 2. Build the Docker images based on the instructions specified in the Dockerfiles:
 
-**Web Application**
+**1. Web Application**
 
 ```
 docker build --tag dockerjavaapp .
 ```
 ![](imgs/app_build.png)
 
-**API Gateway**
+
+**2. API Gateway**
 
 ```
 docker build --tag dockerapigateway .
 ```
 ![](imgs/apig_build.png)
 
+
 3. With docker run create and start a new container, running the previous images:
 
-**Web Application**
+**1. Web Application**
 
 ```
 docker run -d -p 8090:8090 --name containerdockerjavaapp dockerjavaapp
 ```
 ![](imgs/app_cont.png)
 
-**API Gateway**
+**2. API Gateway**
 
 ```
 docker run -d -p 8080:8080 --name containerdockerapigateway dockerapigateway
@@ -216,7 +219,7 @@ docker run -d -p 8080:8080 --name containerdockerapigateway dockerapigateway
 
 1. Create the *docker-compose.yml* file at the root of each project:
 
-**Web Application:** [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro)
+**1. Web Application:** [intro](https://github.com/nduran06/AYGO-Intro-2/tree/master/intro)
 
 ```
 services:
@@ -230,7 +233,7 @@ services:
 
 ```
 
-**API Gateway:** [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway) 
+**2. API Gateway:** [api.gateway](https://github.com/nduran06/AYGO-Intro-2/tree/master/api.gateway) 
 
 ```
 services:
@@ -251,22 +254,22 @@ docker-compose up -d
 
 ```
 
-**Web Application** 
+**1. Web Application** 
 
 ![](imgs/app_compose.png)
 
-**API Gateway** 
+**2. API Gateway** 
 ![](imgs/apig_compose.png)
 
 
 Using Docker Desktop, you can verify your configuration:
 
 
-**Web Application** 
+**1. Web Application** 
 
 ![](imgs/app_dash.png)
 
-**API Gateway** 
+**2. API Gateway** 
 ![](imgs/apig_dash.png)
 
 It should now be possible to make a post request via the API gateway:
@@ -274,21 +277,23 @@ It should now be possible to make a post request via the API gateway:
 ![](imgs/post1.png)
 ![](imgs/db_record1.png)
 
-## Docker Hub
 
-**Web Application** 
+### Docker Hub
+
+
+**1. Web Application** 
 
 1. Repository created: [nduran06/aygo-intro2-webapp](https://hub.docker.com/repository/docker/nduran06/aygo-intro2-webapp/general)
 
 2. Upload the web application docker image to the repository:
 
-> ```docker tag <Docker image name> <Docker Hub repository name>```
+> ```docker tag <Docker image name> <Docker Hub repository name>:<tag>```
 
 ```
 docker tag intro_user_web_app nduran06/aygo-intro2-webapp:v1
 ```
 
-> ```docker push <Docker Hub repository name>```
+> ```docker push <Docker Hub repository name>:<tag>```
 
 ```
 docker push nduran06/aygo-intro2-webapp:v1
@@ -312,9 +317,12 @@ You should now be able to make requests using your EC2 machine's IP/DNS:
 ![](imgs/post2.png)
 ![](imgs/db_record2.png)
 
-**API Gateway**
+
+**2. API Gateway**
+
 
 ***Remember:*** Change the related web application url in the **application.properties** (*userWebApp.path*):
+
 
 ![](imgs/api_code1.png)
 
@@ -328,17 +336,18 @@ Since it is used in the configuration bean:
 docker compose up -d --no-deps --build apigateway_app
 ```
 
+
 1. Repository created: [nduran06/aygo-intro2-apigateway](https://hub.docker.com/repository/docker/nduran06/aygo-intro2-apigateway/general)
 
 2. Upload the web application docker image to the repository:
 
-> ```docker tag <Docker image name> <Docker Hub repository name>```
+> ```docker tag <Docker image name> <Docker Hub repository name>:<tag>```
 
 ```
-docker tag apigateway-apigateway_app:latest nduran06/aygo-intro2-apigateway:v1
+docker tag apigateway_apigateway_app:latest nduran06/aygo-intro2-apigateway:v1
 ```
 
-> ```docker push <Docker Hub repository name>```
+> ```docker push <Docker Hub repository name>:<tag>```
 
 ```
 docker push nduran06/aygo-intro2-apigateway:v1
