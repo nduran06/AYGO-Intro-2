@@ -251,7 +251,6 @@ services:
 
 ```
 docker-compose up -d
-
 ```
 
 **1. Web Application** 
@@ -371,6 +370,8 @@ You should now be able to make requests using your EC2 machine's IP/DNS:
 ![](imgs/post3.png)
 ![](imgs/db_record3.png)
 
+## Test run video (Spanish)
+[![asciicast](https://github.com/nduran06/AYGO-Intro-Part-2-Introduction-to-Virtualization-and-Distributed-Programming/blob/master/imgs/play_click.png)](https://pruebacorreoescuelaingeduco-my.sharepoint.com/:v:/g/personal/natalia_duran-v_mail_escuelaing_edu_co/EWxWdd_DYWtDvYU96hku4ykBJ-1HPeZmCrb-94GEIMi2Dg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=OkgApM)
 
 
 
